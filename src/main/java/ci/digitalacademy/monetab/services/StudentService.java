@@ -2,19 +2,20 @@ package ci.digitalacademy.monetab.services;
 
 import ci.digitalacademy.monetab.models.Student;
 import ci.digitalacademy.monetab.models.User;
+import ci.digitalacademy.monetab.services.dto.StudentDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface StudentService {
 
-    Student save(Student student);
+    StudentDTO save(StudentDTO studentDTO);
 
-    Student update(Student student);
+    StudentDTO update(StudentDTO studentDTO);
 
-    Optional<Student> findOne(Long id_person);
+    Optional<StudentDTO> findOne(Long id_person);
 
-    List<Student> findAll();
+    List<StudentDTO> findAll();
 
     void delete(Long id_person);
 }

@@ -1,17 +1,14 @@
-package ci.digitalacademy.monetab.controller;
+package ci.digitalacademy.monetab.controllers;
 
-import ci.digitalacademy.monetab.models.Student;
 import ci.digitalacademy.monetab.models.Teacher;
 import ci.digitalacademy.monetab.services.TeacherService;
+import ci.digitalacademy.monetab.services.dto.TeacherDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,30 +22,30 @@ public class TeachersController {
 
     @GetMapping("/add")
     public String showAddTeacherPage(Model model){
-        model.addAttribute("teacher", new Teacher());
+        model.addAttribute("teacher", new TeacherDTO());
         return "teachers/forms";
     }
 
     @PostMapping
-    public String saveTeacher(Teacher teacher){
+    public String saveTeacher(TeacherDTO teacherDTO){
         log.debug("Request to save teacher");
-        teacherService.save(teacher);
+        teacherService.save(teacherDTO);
         return "redirect:/teachers";
     }
 
     @GetMapping
     public String showTeacherPage(Model model){
-        List<Teacher> teachers = teacherService.findAll();
-        model.addAttribute("teachers",teachers);
+        List<TeacherDTO> teacherDTOS = teacherService.findAll();
+        model.addAttribute("teachers",teacherDTOS);
         return "teachers/list";
     }
 
     @GetMapping("/{id_person}")
     public String showUpdateTeacherForms(@PathVariable Long id_person, Model model){
         log.debug("Request to show update student forms");
-        Optional<Teacher> teacher = teacherService.findOne(id_person);
-        if (teacher.isPresent()){
-            model.addAttribute("teacher", teacher.get());
+        Optional<TeacherDTO> teacherDTO = teacherService.findOne(id_person);
+        if (teacherDTO.isPresent()){
+            model.addAttribute("teacher", teacherDTO.get());
             return "teachers/forms";
         }else {
             return "redirect:/teachers";

@@ -3,19 +3,20 @@ package ci.digitalacademy.monetab.services;
 import ci.digitalacademy.monetab.models.NoteFile;
 import ci.digitalacademy.monetab.models.Student;
 import ci.digitalacademy.monetab.models.User;
+import ci.digitalacademy.monetab.services.dto.NoteFileDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface NoteFileService {
 
-    NoteFile save(NoteFile noteFile);
+    NoteFileDTO save(NoteFileDTO noteFileDTO);
 
-    NoteFile update(NoteFile noteFile);
+    NoteFileDTO update(NoteFileDTO noteFileDTO);
 
-    Optional<NoteFile> findOne(Long id_noteFile);
+    Optional<NoteFileDTO> findOne(Long id_noteFile);
 
-    List<NoteFile> findAll();
+    List<NoteFileDTO> findAll();
 
     void delete(Long id_noteFile);
 }

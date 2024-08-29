@@ -1,9 +1,8 @@
-package ci.digitalacademy.monetab.controller;
+package ci.digitalacademy.monetab.controllers;
 
-import ci.digitalacademy.monetab.models.Teacher;
 import ci.digitalacademy.monetab.models.User;
-import ci.digitalacademy.monetab.repositories.UserRepository;
 import ci.digitalacademy.monetab.services.UserService;
+import ci.digitalacademy.monetab.services.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -27,32 +26,32 @@ public class UsersController {
 
     @GetMapping("/add")
     public String showAddUserPage(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserDTO());
         return "users/forms";
     }
 
     @PostMapping
-    public String saveUser(User user){
+    public String saveUser(UserDTO userDTO){
         log.debug("Request to show save user");
-        if (user.getCreationDate() == null) {
-            user.setCreationDate(Instant.now());
+        if (userDTO.getCreationDate() == null) {
+            userDTO.setCreationDate(Instant.now());
         }
-        userService.save(user);
+        userService.save(userDTO);
         return "redirect:/users";
     }
     @GetMapping
     public String showUserPage(Model model){
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
+        List<UserDTO> userDTOS = userService.findAll();
+        model.addAttribute("users", userDTOS);
         return "users/list";
     }
 
     @GetMapping("/{id_user}")
     public String showUpdateTeacherForms(@PathVariable Long id_user, Model model){
         log.debug("Request to show update user forms");
-        Optional<User> user = userService.findOne(id_user);
-        if (user.isPresent()){
-            model.addAttribute("user", user.get());
+        Optional<UserDTO> userDTO = userService.findOne(id_user);
+        if (userDTO.isPresent()){
+            model.addAttribute("user", userDTO.get());
             return "users/forms";
         }else {
             return "redirect:/users";

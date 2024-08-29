@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
+@Builder
 @Table(name = "address")
 public class Address {
 
@@ -18,14 +19,15 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_addess;
 
-    @Column(nullable = false, name = "compagny")
-    private String compagny;
+    @Column(nullable = false, name = "country")
+    private String country;
 
     @Column(nullable = false, name = "city")
     private String city;
 
     @Column(nullable = false, name = "street")
     private String street;
+
 
 
 }

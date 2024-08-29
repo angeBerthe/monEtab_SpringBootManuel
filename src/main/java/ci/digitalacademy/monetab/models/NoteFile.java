@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "noteFile")
 public class NoteFile {
 
@@ -21,6 +22,5 @@ public class NoteFile {
 
     @Column(nullable = false, name = "annee")
     private String annee;
-
 
 }
